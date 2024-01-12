@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {InMemoryDbService, RequestInfo} from 'angular-in-memory-web-api'
-import { TODOS } from './mock-todo';
+import { TODOS } from './todo/mock-todo';
 
 @Injectable({
   providedIn: 'root'

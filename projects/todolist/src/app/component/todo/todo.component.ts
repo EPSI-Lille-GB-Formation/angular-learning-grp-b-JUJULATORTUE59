@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Todos } from '../todo';
+import { Todos } from '../../todo/todo';
 import { CommonModule } from '@angular/common';
-import { TodoListDirective } from '../todo-list.directive';
+import { TodoListDirective } from '../../directives/todo-list.directive';
+import { Router } from '@angular/router';
 @Component({
   selector: 'todo',
   standalone: true,
@@ -19,6 +20,7 @@ import { TodoListDirective } from '../todo-list.directive';
    </label>
    <div class= "action">
    <a href="#">Edit</a>
+   <a (click)="goToTaskDetails()">View</a>
    <a href="#">Delete</a>
    </div>
   </div>
@@ -39,10 +41,18 @@ export class TodoComponent {
     @Input("value")
     todo: Todos | undefined;
 
+    constructor(
+      private router: Router
+    ){}
+
     onCheck(){
       if(this.todo){
         this.todo.isCompleted = !this.todo?.isCompleted;
         console.table(this.todo)
       }
+    }
+
+    goToTaskDetails(){
+      this.router.navigate(['/task/', this.todo?.id])
     }
 }

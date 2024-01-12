@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { TODOS } from '../mock-todo';
-import { TodoListDirective } from '../todo-list.directive';
-import { TodoComponent } from '../todo/todo.component';
+import { TODOS } from '../todo/mock-todo';
+import { TodoListDirective } from '../directives/todo-list.directive';
+import { TodoComponent } from '../component/todo/todo.component';
 import { TodoService } from '../todo.service';
-import { Todos } from '../todo';
+import { Todos } from '../todo/todo';
 
 @Component({
   selector: 'todo-list',
@@ -18,7 +18,7 @@ import { Todos } from '../todo';
       <a href="#" role="button" [class.secondary] = "completedAll"(click)="onClickTodoAfficher()">Afficher tous</a>
       <ng-container *ngFor="let todo of todolist">
       <ng-container *ngIf=" todo.isCompleted === completedFilter || completedAll">
-        <todo [value] = "todo" />
+        <todo [value] = "todo"/>
       </ng-container>
       </ng-container>
       `,
@@ -35,6 +35,7 @@ export class TodoListComponent {
 
   ngInit() : void{
     this.todoService.getTodoList().subscribe(todos => this.todolist = todos)
+    this.todoService.getTodoById(5).subscribe(todo => console.log(todo))
   }
 
   onClickTodo(): void{
