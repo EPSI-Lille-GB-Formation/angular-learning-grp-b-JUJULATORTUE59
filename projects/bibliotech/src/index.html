@@ -1,0 +1,12 @@
+<h2>{{ livre.titre }}</h2>
+<p>{{ livre.auteur }}</p>
+<ul>
+  <li *ngFor="let page of livre.pages">
+    {{ page.contenu }}
+    <button (click)="supprimerPage(page)">Supprimer</button>
+  </li>
+</ul>
+<form (ngSubmit)="ajouterPage()">
+  <input type="text" [(ngModel)]="nouvellePageContenu" placeholder="Contenu de la nouvelle page">
+  <button type="submit">Ajouter une page</button>
+</form>
